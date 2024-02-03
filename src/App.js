@@ -4,6 +4,7 @@ import DetailsPage from './detailPage/DetailsPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  
   const [data, setData] = useState({
     search: '',
     year: '',
