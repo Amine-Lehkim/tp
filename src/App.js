@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store';
 import Wishlist from './Wishlist'; 
+import './App.css'; 
 
 function App() {
   
@@ -42,8 +43,8 @@ function App() {
           path="/"
           element={
             <div className="row container mt-3">
-              <form>
-                <div className=" col-3 form-group">
+              <form className='search-container'>
+                <div className=" col-3 form-group search-input">
                   <input
                     className="form-control"
                     name="search"
@@ -52,7 +53,7 @@ function App() {
                     placeholder="Search..."
                   />
                 </div>
-                <div className="col-3 form-group">
+                <div className="col-3 form-group search-input">
                   <input
                     className="form-control"
                     name="year"
@@ -61,7 +62,7 @@ function App() {
                     placeholder="Year"
                   />
                 </div>
-                <div className="col-3 form-group">
+                <div className="col-3 form-group search-input">
                   <select
                     className="form-control"
                     name="type"
@@ -74,7 +75,7 @@ function App() {
                 </div>
                 <button 
                   type="button"
-                  className=" col-3 btn btn-primary"
+                  className=" col-3 btn btn-primary search-button" 
                   onClick={handleClick}
                 >
                   Search
@@ -83,7 +84,7 @@ function App() {
 
               {inputSearch && inputSearch.map(item => (
                 <div key={item.imdbID} className="card mt-3">
-                  <div className="card-body">
+                  <div className="card-body card-container">
                     <h5 className="card-title">{item.Title}</h5>
                     <p className="card-text">{item.Year}</p>
                     <Link
@@ -111,7 +112,7 @@ function App() {
         <Route
             path="/wishlist"
             element={<Wishlist />}
-          />
+        />
       </Routes>
     </Router>
     </Provider>

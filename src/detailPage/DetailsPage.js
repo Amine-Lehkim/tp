@@ -62,7 +62,7 @@ function DetailsPage({ selectedMovieId, addToWishlist }) {
         </tbody>
       </table>
       <button onClick={() => addToWishlist({ id: selectedMovieId, title: Title, year: Year })}>
-        Add to Wishlist
+        <i className="fas fa-heart"></i> Add to Wishlist
       </button>
     </div>
   );
