@@ -8,7 +8,7 @@ function DetailsPage({ selectedMovieId }) {
     const fetchMovieDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://www.omdbapi.com/?apikey=4d94a812&i=${selectedMovieId}` );
+        const response = await fetch(`https://www.omdbapi.com/?apikey=4d94a812&i=${selectedMovieId}` )
         const data = await response.json();
 
         if (data.Response === 'True') {
