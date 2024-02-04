@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';  
+import { addToWishlist } from '../actions';
 
-function DetailsPage({ selectedMovieId }) {
+function DetailsPage({ selectedMovieId, addToWishlist }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -59,8 +61,15 @@ function DetailsPage({ selectedMovieId }) {
           </tr>
         </tbody>
       </table>
+      <button onClick={() => addToWishlist({ id: selectedMovieId, title: Title, year: Year })}>
+        Add to Wishlist
+      </button>
     </div>
   );
 }
 
-export default DetailsPage;
+const mapDispatchToProps = {
+  addToWishlist,
+};
+
+export default connect(null, mapDispatchToProps)(DetailsPage);

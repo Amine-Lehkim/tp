@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import DetailsPage from './detailPage/DetailsPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import store from './store';
+import Wishlist from './Wishlist'; 
 
 function App() {
   
@@ -104,6 +107,10 @@ function App() {
           path="/details"
           element={<DetailsPage selectedMovieId={selectedMovieId} />}
         />
+        <Route
+            path="/wishlist"
+            element={<Wishlist />}
+          />
       </Routes>
     </Router>
   );
