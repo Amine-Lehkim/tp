@@ -35,6 +35,7 @@ function App() {
   };
 
   return (
+    <Provider store={store}>
     <Router>
       <Routes>
         <Route
@@ -113,6 +114,7 @@ function App() {
           />
       </Routes>
     </Router>
+    </Provider>
   );
 
 }
