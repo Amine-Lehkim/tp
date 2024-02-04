@@ -33,8 +33,7 @@ function App() {
     fetch(`https://www.omdbapi.com/?apikey=4d94a812&s=${data.search}&y=${data.year}&type=${data.type}`)
       .then(resp => resp.json())
       .then(resp => setInputSearch(resp.Search || []));
-  };
-
+  }
   return (
     <Provider store={store}>
     <Router>
@@ -126,7 +125,6 @@ function App() {
             element={<Wishlist />}
         />
       </Routes>
-      
     </Router>
     </Provider>
   );

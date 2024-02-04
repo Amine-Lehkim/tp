@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../actions';
+import './style.css'; 
 
 function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishlist }) {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -17,7 +18,6 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
         if (data.Response === 'True') {
           setMovieDetails(data);
 
-          // Check if the movie is in the wishlist
           const movieInWishlist = wishlist.some(movie => movie.id === selectedMovieId);
           setIsInWishlist(movieInWishlist);
         } else {
@@ -34,6 +34,10 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
       fetchMovieDetails();
     }
   }, [selectedMovieId, wishlist]);
+
+  useEffect(() => {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -54,39 +58,34 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
   };
 
   return (
-    <div>
-      <h2>Movie Details</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th>Title</th>
-            <td>{Title}</td>
-          </tr>
-          <tr>
-            <th>Year</th>
-            <td>{Year}</td>
-          </tr>
-          <tr>
-            <th>Poster</th>
-            <td>
-              {Poster && <img src={Poster} alt={Title} style={{ maxWidth: '100px' }} />}
-            </td>
-          </tr>
-          <tr>
-            <th>Type</th>
-            <td>{Type}</td>
-          </tr>
-        </tbody>
-      </table>
-      {isInWishlist ? (
-        <button onClick={handleRemoveFromWishlist} disabled>
-          Already in Wishlist
-        </button>
-      ) : (
-        <button onClick={handleAddToWishlist}>
-          Add to Wishlist
-        </button>
-      )}
+    <div className="details-container">
+      <div className="details-image">
+        {Poster && <img src={Poster} alt={Title} className="details-poster" />}
+      </div>
+      <div className="details-info">
+        <h2>{Title}</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>Year</th>
+              <td>{Year}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{Type}</td>
+            </tr>
+          </tbody>
+        </table>
+        {isInWishlist ? (
+          <button className="wishlist-btn" onClick={handleRemoveFromWishlist} disabled>
+            <i className="fas fa-heart"></i> Already in Wishlist
+          </button>
+        ) : (
+          <button className="wishlist-btn" onClick={handleAddToWishlist}>
+            <i className="fas fa-heart"></i> Add to Wishlist
+          </button>
+        )}
+      </div>
     </div>
   );
 }
