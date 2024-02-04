@@ -38,6 +38,18 @@ function App() {
   return (
     <Provider store={store}>
     <Router>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Link className="navbar-brand" to="/">My Movie App</Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/wishlist">
+                <i className="fas fa-heart"></i> Wishlist
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <Routes>
         <Route
           path="/"
@@ -114,6 +126,7 @@ function App() {
             element={<Wishlist />}
         />
       </Routes>
+      
     </Router>
     </Provider>
   );
