@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../actions';
-import './style.css'; 
+import './style.css';
 
 function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishlist }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -47,7 +48,7 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
 
   const handleAddToWishlist = () => {
     if (!isInWishlist) {
-      addToWishlist({ id: selectedMovieId, title: Title, year: Year });
+      addToWishlist({ id: selectedMovieId, title: Title, year: Year, quantity });
       setIsInWishlist(true);
     }
   };
@@ -55,6 +56,16 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
   const handleRemoveFromWishlist = () => {
     removeFromWishlist(selectedMovieId);
     setIsInWishlist(false);
+  };
+
+  const handleIncrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -73,6 +84,14 @@ function DetailsPage({ selectedMovieId, addToWishlist, removeFromWishlist, wishl
             <tr>
               <th>Type</th>
               <td>{Type}</td>
+            </tr>
+            <tr>
+              <th>Quantity</th>
+              <td>
+                <button className='btn btn-secondary' onClick={handleDecrementQuantity}>-</button>
+                {quantity}
+                <button className='btn btn-secondary' onClick={handleIncrementQuantity}>+</button>
+              </td>
             </tr>
           </tbody>
         </table>

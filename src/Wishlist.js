@@ -8,8 +8,11 @@ function Wishlist({ wishlist, removeFromWishlist }) {
       <h2><i className="fas fa-heart"></i> Wishlist</h2>
       <ul>
         {wishlist.map((movie) => (
-          <li key={movie.id}>
-            {movie.title} - {movie.year}
+          <li className='card' key={movie.id}>
+            <div> 
+              {movie.title} - {movie.year} 
+            </div>
+              Quantity: {movie.quantity}
             <button onClick={() => removeFromWishlist(movie.id)}>Remove</button>
           </li>
         ))}
